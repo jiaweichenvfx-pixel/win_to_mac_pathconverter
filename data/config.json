@@ -1,0 +1,16 @@
+{
+  "mappings": [
+    {
+      "mac": "",
+      "win": "C"
+    },
+    {
+      "mac": "/Volumes/projects",
+      "win": "P"
+    },
+    {
+      "mac": "/Volumes/framestore",
+      "win": "Y"
+    }
+  ]
+}
