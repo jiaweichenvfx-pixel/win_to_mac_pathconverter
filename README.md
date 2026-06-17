@@ -145,6 +145,7 @@ PathConverter.app/Contents/Resources/config.json
 | `Sources/PathConverter/` | 菜单栏 app、浮窗、剪贴板监听 |
 | `Tests/PathConverterCoreTests/` | 转换规则测试 |
 | `build.sh` | 一键编译脚本 |
+| `Assets/AppIcon.png` | app 图标源图 |
 | `data/config.json` | 构建时写入 app 的默认盘符映射 |
 | `PathConverter.app` | 编译产物 |
 
