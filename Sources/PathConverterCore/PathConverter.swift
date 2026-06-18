@@ -66,6 +66,7 @@ public struct PathConverter: Sendable {
 
     public func detectMacPathPrompt(_ rawPath: String) -> ConversionResult? {
         let source = cleanPath(rawPath)
+        guard !source.looksLikeURL else { return nil }
         guard let match = bestMacMappingMatch(for: source) else { return nil }
 
         return ConversionResult(
@@ -116,11 +117,12 @@ public struct PathConverter: Sendable {
 
     private func firstWindowsPath(in text: String) -> String? {
         let cleaned = cleanPath(text)
+        guard !cleaned.looksLikeURL else { return nil }
         if parseWindowsPath(cleaned) != nil {
             return cleaned
         }
 
-        let pattern = #"(?i)[A-Z]:[\\/][^\n\r"]+"#
+        let pattern = #"(?i)(?<![A-Z0-9])[A-Z]:[\\/](?!/)[^\n\r"]+"#
         guard let range = cleaned.range(of: pattern, options: .regularExpression) else { return nil }
         return String(cleaned[range]).trimmedPathPunctuation()
     }
@@ -188,5 +190,12 @@ private extension String {
 
     func hasPathPrefix(_ prefix: String) -> Bool {
         self == prefix || hasPrefix(prefix + "/")
+    }
+
+    var looksLikeURL: Bool {
+        range(
+            of: #"^[A-Z][A-Z0-9+.-]*://"#,
+            options: [.regularExpression, .caseInsensitive]
+        ) != nil
     }
 }

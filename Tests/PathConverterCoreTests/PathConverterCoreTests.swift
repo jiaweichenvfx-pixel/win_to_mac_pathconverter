@@ -61,9 +61,23 @@ struct PathConverterCoreTests {
 
     @Test("Detection extracts first Windows path from surrounding text")
     func detectionExtractsFirstWindowsPathFromSurroundingText() throws {
-        let result = try #require(converter.detectWindowsPath(in: #"render path: "Y:\show 01\shot_020\plates""#))
+        let result = try #require(converter.detectWindowsPath(in: #"render path: "W:\show 01\shot_020\plates""#))
 
-        #expect(result.source == #"Y:\show 01\shot_020\plates"#)
+        #expect(result.source == #"W:\show 01\shot_020\plates"#)
         #expect(result.converted == "/Volumes/framestore/show 01/shot_020/plates")
+    }
+
+    @Test(
+        "URLs are not detected as Windows paths",
+        arguments: [
+            "https://example.com/path/to/file",
+            "http://example.com/P:/shots/seq",
+            "vscode://file/P:/shots/seq/shot_001",
+            "ftp://server.local/assets"
+        ]
+    )
+    func urlsAreNotDetectedAsWindowsPaths(url: String) {
+        #expect(converter.detectWindowsPath(in: url) == nil)
+        #expect(converter.detectMacPathPrompt(url) == nil)
     }
 }

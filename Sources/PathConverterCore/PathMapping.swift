@@ -30,7 +30,7 @@ public struct PathMapping: Codable, Equatable, Sendable {
     public static let defaults: [PathMapping] = [
         PathMapping(win: "C", mac: ""),
         PathMapping(win: "P", mac: "/Volumes/projects"),
-        PathMapping(win: "Y", mac: "/Volumes/framestore")
+        PathMapping(win: "W", mac: "/Volumes/framestore")
     ]
 
     public static func normalizeDrive(_ value: String) -> String {

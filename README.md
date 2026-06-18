@@ -21,7 +21,7 @@
 |---|---|---|
 | C: | （空） | 忽略，不弹窗 |
 | P: | `/Volumes/projects` | 转换 |
-| Y: | `/Volumes/framestore` | 转换 |
+| W: | `/Volumes/framestore` | 转换 |
 | 其他 (D, E, F…) | `/Volumes/{盘符}/` | 转换 |
 
 默认映射表内置在 app 包里。首次运行时，app 会把它复制到用户配置目录，之后你可以通过菜单栏 **Open Config** 手动编辑，再点 **Reload Config** 生效，**无需重新编译**。
@@ -128,7 +128,7 @@ PathConverter.app/Contents/Resources/config.json
   "mappings": [
     { "win": "C", "mac": "" },
     { "win": "P", "mac": "/Volumes/projects" },
-    { "win": "Y", "mac": "/Volumes/framestore" }
+    { "win": "W", "mac": "/Volumes/framestore" }
   ]
 }
 ```
@@ -146,6 +146,7 @@ PathConverter.app/Contents/Resources/config.json
 | `Tests/PathConverterCoreTests/` | 转换规则测试 |
 | `build.sh` | 一键编译脚本 |
 | `Assets/AppIcon.png` | app 图标源图 |
+| `Assets/AppIcon.icns` | 构建时复制进 app 的 macOS 图标 |
 | `data/config.json` | 构建时写入 app 的默认盘符映射 |
 | `PathConverter.app` | 编译产物 |
 
